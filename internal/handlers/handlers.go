@@ -138,7 +138,10 @@ func CreateExpenseAmountHandler(bot *tgbotapi.BotAPI, chatID int64, client FinMa
 	keyboard := tgbotapi.NewInlineKeyboardMarkup(buttons...)
 	replyMsg := tgbotapi.NewMessage(chatID, "Выберите категорию для траты:")
 	replyMsg.ReplyMarkup = keyboard
-	bot.Send(replyMsg)
+	_, err = bot.Send(replyMsg)
+	if err != nil {
+		return
+	}
 }
 
 func CreateExpenseActionDateHandler(bot *tgbotapi.BotAPI, chatID int64, text string) {
